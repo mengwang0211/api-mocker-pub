@@ -1,0 +1,35 @@
+version: '2'
+services:
+  mongodb:
+    image: daocloud.io/mongo:2.7.6
+    restart: always
+    container_name: mongodb
+    hostname: mongodb
+    volumes:
+      - ./db:/data/db
+    ports:
+      - "27017:27017"
+  api-mocker-server:
+    build:
+      context: ./
+      dockerfile: ./server/Dockerfile
+    restart: always
+    container_name: api-mocker-server
+    image: wtx/api-mocker-server
+    hostname: api-mocker-server
+    ports:
+      - 7001:7001
+    external_links:
+      - 'mongodb'
+  api-mocker-client:
+    build:
+      context: ./
+      dockerfile: ./client/Dockerfile
+    restart: always
+    container_name: api-mocker-client
+    image: wtx/api-mocker-client
+    hostname: api-mocker-client
+    ports:
+      - 10086:80
+    external_links:
+      - 'api-mocker-server'
