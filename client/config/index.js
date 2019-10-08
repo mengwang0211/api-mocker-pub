@@ -38,6 +38,6 @@ module.exports = {
     // In our experience, they generally work as expected,
     // just be aware of this issue when enabling this option.
     cssSourceMap: false,
-    serverRoot: '172.31.0.42:7001'
+    serverRoot: '118.24.243.105:7001'
   }
 }
